@@ -1,7 +1,0 @@
-# http://henderson2k.netlify.com/* http://www.henderson2k.com/:splat 301!
-
-/b    https://www.google.co.uk 200
-/c    https://bl.ocks.org/henderson2k/raw/b01ab7f742b8e45c733e3ccdab2cbf18/ 200
-/d    http://firstport2 
-
-/* /index.html 200
