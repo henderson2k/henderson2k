@@ -21,7 +21,11 @@ async function convertUrlsToLinks() {
     const text = await response.text();
     const formattedText = text.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
 
-    document.getElementById('output').innerHTML = formattedText;
+    // Preserve line breaks
+    const lines = formattedText.split('\n');
+    const htmlWithLineBreaks = lines.map(line => line + '<br>').join('');
+
+    document.getElementById('output').innerHTML = htmlWithLineBreaks;
   } catch (error) {
     console.error('Error:', error);
   }
