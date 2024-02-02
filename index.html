@@ -32,8 +32,6 @@
             const contentDiv = document.createElement('div');
             contentDiv.innerHTML = text;
 
-            outputDiv.appendChild(contentDiv);
-
             const urls = text.match(/https?:\/\/\S+/g) || [];
 
             urls.forEach(url => {
@@ -42,11 +40,11 @@
                 link.textContent = url;
                 link.target = '_blank'; // Open link in a new tab
 
-                const br = document.createElement('br');
-
-                outputDiv.appendChild(link);
-                outputDiv.appendChild(br);
+                // Replace the original URL with the hyperlink in the content
+                contentDiv.innerHTML = contentDiv.innerHTML.replace(url, link.outerHTML);
             });
+
+            outputDiv.appendChild(contentDiv);
         }
     </script>
 </body>
