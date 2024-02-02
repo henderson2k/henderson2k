@@ -1,1 +1,49 @@
-henderson2k
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URLs to Hyperlinks</title>
+</head>
+<body>
+    <button id="loadFile">Load URLs</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('loadFile').addEventListener('click', loadFile);
+
+        function loadFile() {
+            const githubUrl = 'https://raw.githubusercontent.com/henderson2k/Work/main/urls.txt';
+
+            fetch(githubUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(text => createHyperlinks(text))
+                .catch(error => console.error('Error fetching the file:', error));
+        }
+
+        function createHyperlinks(text) {
+            const urls = text.match(/https?:\/\/\S+/g) || [];
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous content
+
+            urls.forEach(url => {
+                const link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                link.target = '_blank'; // Open link in a new tab
+
+                const br = document.createElement('br');
+
+                outputDiv.appendChild(link);
+                outputDiv.appendChild(br);
+            });
+        }
+    </script>
+</body>
+</html>
